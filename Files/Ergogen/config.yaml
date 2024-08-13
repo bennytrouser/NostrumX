@@ -1,0 +1,576 @@
+units:
+  capx: 17.5   # Actual mbk size
+  capy: 16.5   # Actual mbk size
+  thumbcapx: 26.5 # Actual mbk 1.5u length
+  kx: cx + 0.5    # Key spacing horizontal
+  ky: cy + 0.5    # Key spacing vertical
+  pinky_splay: 3  # Degrees of splay between pinky and ring columns
+  pinky_adj: -10   # Adjustment to compensate for splay spacing
+  ring_splay: 3
+  ring_adj: -8
+  middle_splay: 0
+  middle_adj: 0
+  thumb_offsetx: 0.25kx
+  xiao_x: 17.5
+  xiao_y: 21
+  outx: 0.5capx +1  # Used for plate outlines
+  outy: 0.5capy +1  # Used for plate outlines
+  mirshift: 31
+
+points:
+  # Key Zones
+  zones:
+  zones.matrix:
+    anchor:
+      shift: [100,-100]
+      rotate: ring_splay + pinky_splay
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+    key:
+      width: capx
+      height: capy
+      spread: cx      
+      padding: cy
+    rows:
+      bottom:
+        row_net: R2
+        mirror.row_net: MR2
+        bind: [1, 1, 1, 1]
+      home:
+        row_net: R1
+        mirror.row_net: MR1
+        bind: [1, 1.5, 0, 1]
+      top:
+        row_net: R0
+        mirror.row_net: MR0
+        bind: [1, 2, 0, 1]
+    columns:
+      pinky:
+        key:
+          column_net: C0
+          mirror.column_net: MC0
+          rows:
+            bottom:
+              bind: [1, 1, 1, 1]
+            home:
+              bind: [1, 1.5, 0, 1]
+            top:
+              bind: [1, 2, 0, 1]
+      ring:
+        key:
+          column_net: C1
+          mirror.column_net: MC1
+          stagger: 0.55U
+          splay: -pinky_splay
+          origin: [0, pinky_adj]
+        rows:
+          bottom:
+            bind: [1,1.5,11.9,0]
+          home:
+            bind: [1,1.5,0,1]
+          top.:
+            ind: [1,2,1,1]
+      middle:
+        key:
+          column_net: C2
+          mirror.column_net: MC2
+          stagger: 0.25U
+          splay: -ring_splay
+          origin: [0, ring_adj]
+        rows:
+          bottom:
+            bind: [1,1,17.1,0]
+          home:
+            bind: [1,1,0,1]
+          top:
+            bind: [1,1,0,1]
+      index:
+        key:
+          column_net: C3
+          mirror.column_net: MC3
+          stagger: -0.25U
+        rows:
+          bottom:
+            bind: [1,1,12.341,1]
+          home:
+            bind: [1,1,0,1]
+          top:
+            bind: [1,1,0,1]
+      inner:
+        key:
+          column_net: C4
+          mirror.column_net: MC4
+          stagger: 0.5ky
+        rows:
+          top.skip: true
+          bottom:
+            row_net: R1
+            mirror.row_net: MR1
+            bind: [1,2,22.590471307,1]
+          home:
+            row_net: R0
+            mirror.row_net: MR0
+            bind: [1,2,20,1]
+  zones.thumb:
+    anchor:
+      ref: matrix_index_top
+      shift: [0.6u,-57]
+      rotate: -20
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+    key:
+      width: capx
+      height: capy
+    rows:
+      home:
+        row_net: R2
+        mirror.row_net: MR2
+    columns:
+      left.key:
+        name: thumb_tucky
+        bind: [0,3,1,1] # U,R,D,L
+        column_net: C4
+        mirror.column_net: MC4
+      right.key:
+        spread: kx+0.2
+        stagger: 0.225kx
+        rotate: -95
+        name: thumb_reachy
+        bind: [1,1,2,1.2191] # R,D,L,U
+        column_net: C5
+        mirror.column_net: MC5
+
+  # Components Zones
+
+  # MCU
+  zones.mcu:
+    anchor:
+      ref: matrix_inner_home
+      shift: [19.5,-2.75]
+      rotate: 0
+    mirror: 
+      ref: matrix_inner_home
+      shift: mirshift
+    key:
+      name: mcu
+      width: xiao_x+1
+      height: xiao_y+1
+
+  # Power slider
+  zones.pcm12:
+    anchor:
+      - ref: mcu
+        shift: [0.5xiao_x+0.3, -1.1xiao_y]
+        rotate: 0
+    key:
+      name: pcm12
+      height: 6.7
+      width: 2.6
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+
+  # Reset switch
+  zones.reset:
+    anchor:
+      - ref: matrix_inner_bottom
+        shift: [0, -0.9cy]
+    key:
+      name: reset
+      height: 3
+      width: 2.5
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+
+  # Mounting Holes
+  zones.mount_tl:
+    anchor:
+      - ref: matrix_ring_home
+        shift: [-0.5cx -1,0.55cy]
+    key:
+      name: mounthole_tl
+      height: 3.1
+      width: 3.1
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+  zones.mount_tr:
+    anchor:
+      - ref: matrix_inner_bottom
+        shift: [1.52cx,-0cy]
+    key:
+      name: mounthole_tr
+      height: 2.2
+      width: 2.2
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+  zones.mount_tm:
+    anchor:
+      - ref: matrix_middle_top
+        shift: [0.5cx,2]
+    key:
+      name: mounthole_tm
+      height: 2.2
+      width: 2.2
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+  zones.mount_bl:
+    anchor:
+      - ref: matrix_ring_bottom
+        shift: [-0.4 cx,-0.7cy+1]
+    key:
+      name: mounthole_bl
+      height: 2.2
+      width: 2.2
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+  zones.mount_br:
+    anchor:
+      - ref: thumb_reachy
+        shift: [0.5 thumbcapx -3,0.5 capy -3]
+    key:
+      name: mounthole_br
+      height: 2.2
+      width: 2.2
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+
+  # # Battery cutout (Experiment for making cutout for battery in the PCB instead of under with tented case)
+  # zones.battcut:
+  #   anchor:
+  #     - ref: mcu
+  #       shift: [-4, -18]
+  #   mirror:
+  #     ref: matrix_inner_home
+  #     shift: mirshift
+  #   key:
+  #     name: battcut
+  #     height: 30
+  #     width: 20
+
+  # Solder Pads for Battery
+  zones.batpos:
+    anchor:
+      - ref: mcu
+        shift: [ 1, -1.8xiao_y]
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+    key:
+      name: batpos
+      height: 2
+      width: 1
+  zones.batneg:
+    anchor:
+      - ref: mcu
+        shift: [ 4, -1.8xiao_y]
+    mirror:
+      ref: matrix_inner_home
+      shift: mirshift
+    key:
+      name: batneg
+      height: 2
+      width: 1
+      
+
+outlines:
+  # Cutouts for case/Keyplate
+  _casecuts:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      size: [ 13.85, 13.85]
+      bound: false
+
+  # Used for making the pcb outline from keys using bind
+  _keycapsbound:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_tucky/
+      size: [capx, capy]
+      bound: true
+    - what: rectangle
+      where:
+        - /thumb_reachy/
+      size: [thumbcapx, 1capy]
+      bound: true
+  
+  # Used for visualising layout in preview
+  _keycapsunbound:
+    - what: rectangle
+      where:
+        - /matrix_.*/
+        - /thumb_tucky/
+      size: [capx, capy]
+      bound: false
+    - what: rectangle
+      where:
+        - /thumb_reachy/
+      size: [thumbcapx, 1capy]
+      bound: false
+    - what: rectangle
+      where:
+        - /mcu/
+      size: [xiao_x,xiao_y]
+      bound: false
+      fillet: 1
+  _mcu:
+    - what: rectangle
+      where: /mcu/
+      size: [xiao_x, xiao_y]
+      fillet: 1
+
+  # Janky way of adding the shape around the mcu to meet the thumb outline   
+  _mcu_extra:
+    - what: polygon
+      bound: true
+      operation: stack
+      points:
+        - ref: matrix_inner_home
+          shift: [0.5capx, 0.5capy+1]
+        - ref: matrix_inner_home
+          shift: [30, 0.5capy+1]
+        - ref: thumb_reachy
+          shift: [-17,0]
+          affect: y
+        - ref: thumb_reachy
+          orient: -95
+          shift: [-0.5capy-1,0]
+        - ref: thumb_reachy
+          orient: -95
+          shift: 10
+  _mcu_extra_mirror:
+    - what: polygon
+      bound: true
+      operation: stack
+      points:
+        - ref: mirror_matrix_inner_home
+          shift: [0.5capx, 0.5capy+1]
+        - ref: mirror_matrix_inner_home
+          shift: [30, 0.5capy+1]
+        - ref: mirror_thumb_reachy
+          shift: [-17,0]
+          affect: y
+        - ref: mirror_thumb_reachy
+          orient: -95
+          shift: [-0.5capy-1,0]
+        - ref: mirror_thumb_reachy
+          orient: -95
+          shift: 10
+  
+  # Small shape to remove slight overhangs from jank and make the edge cuts work (there are probably better ways to do this)
+  _thumbcut:
+    - what: rectangle
+      where:
+        - ref: thumb_reachy
+          shift: [-1,9.7]
+      size: [45,1]
+  _thumbcut_mirror:
+    - what: rectangle
+      where:
+        - ref: mirror_thumb_reachy
+          shift: [-1,9.7]
+      size: [45,1]
+
+  _mountholes:
+    - what: circle
+      where: /mount.*/
+      radius: 1.55
+
+  _powerslider:
+    - what: rectangle
+      where: /pcm12/
+      size: [2.6,6.2]
+
+  _resethole:
+    - what: circle
+      where: reset
+      radius: 1
+
+  # Define the plate ready for fillet
+  _platecut:
+    - ^_keycapsbound
+    - _mcu_extra
+    - _mcu_extra_mirror
+    - -_thumbcut_mirror
+    - -_thumbcut
+
+  # Filleted Plate for PCB
+  plate:
+    - name: _platecut
+      fillet: 2
+    - name: _mountholes
+      operation: subtract
+
+  # GUI visualisation
+  preview:
+    - ^plate
+    - ^_keycapsunbound
+    - ^_mountholes
+    - ^_thumbcut
+    - ^_thumbcut_mirror
+    - ^_powerslider
+    - ^_resethole
+
+  # Case dxf for bottom part
+  Case_bottom:
+    - ^plate
+    - ^_resethole
+  # DXF for top half of case
+  Case_top:
+    - ^plate
+    - ^_casecuts
+    - ^_mcu
+    - ^_mountholes
+
+pcbs.nostrumX4:
+  outlines.main:
+    outline: plate
+  footprints:
+    - what: chockim
+      where:
+        - /matrix_.*/
+        - /thumb_.*/
+      adjust.rotate: 180
+      params:
+        from: "{{column_net}}"
+        to: "{{colrow}}"
+        reverse: false
+        hotswap: true
+        solder: true
+    - what: combo_diode
+      where:
+        - /^matrix_.*/
+        - /^thumb_.*/
+      params:
+        from: "{{colrow}}"
+        to: "{{row_net}}"
+        include_tht: false
+      adjust:
+        shift: [-5, 4]
+        rotate: -90
+    - what: combo_diode
+      where:
+        - /mirror.matrix_.*/
+        - /mirror.thumb_.*/
+      params:
+        from: "{{colrow}}"
+        to: "{{row_net}}"
+        include_tht: false
+      adjust:
+        shift: [5, 4]
+        rotate: 90
+    - what: xiao_smd
+      where:
+        - /mcu/
+      params:
+        side: F
+        P0: R0
+        P1: R1
+        P2: R2
+        P3: C0
+        P4: C1
+        P5: C2
+        P6: C3
+        P7: C4
+        P8: C5
+        mirror.P0: P0
+        mirror.P1: P1
+        mirror.P2: MC5
+        mirror.P3: MC4
+        mirror.P4: MC3
+        mirror.P5: MC2
+        mirror.P6: MC1
+        mirror.P7: MC0
+        mirror.P8: MR2
+        mirror.P9: MR1
+        mirror.P10: MR0
+        mirror.GND: MGND
+        mirror.RAW3V3: MRAW3V3
+        mirror.RAW5V: MRAW5V
+        mirror.SWDCLK: MSWDCLK
+        mirror.SWDIO: MSWDIO
+        mirror.VIN: MVIN
+        mirror.RST: MRST
+    - what: switch_power
+      where:
+        - /^pcm12/
+      params:
+        from: pos
+        to: VIN
+        side: F
+    - what: switch_power
+      where:
+        - /mirror.pcm12/
+      params:
+        from: Mpos
+        to: MVIN
+        side: F
+      adjust.rotate: 180
+    - what: button
+      where: 
+        - /^reset/
+      params:
+        side: B
+        from: RST
+        to: GND
+    - what: button
+      where: 
+        - /mirror.reset/
+      params:
+        side: B
+        from: MRST
+        to: MGND
+    - what: pad
+      where: 
+        - /^batpos/
+      params:
+        width: 1
+        height: 2
+        front: false
+        back: true
+        text: '+'
+        align: 'left'
+        net: pos
+    - what: pad
+      where: 
+        - /^batneg/
+      params:
+        width: 1
+        height: 2
+        front: false
+        back: true
+        text: 'gnd'
+        align: 'left'
+        net: GND
+    - what: pad
+      where: 
+        - /mirror.batpos/
+      params:
+        width: 1
+        height: 2
+        front: false
+        back: true
+        text: '+'
+        align: 'left'
+        net: Mpos
+    - what: pad
+      where: 
+        - /mirror.batneg/
+      params:
+        width: 1
+        height: 2
+        front: false
+        back: true
+        text: 'gnd'
+        align: 'left'
+        net: MGND
