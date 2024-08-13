@@ -27,3 +27,4 @@ The case is designed to be fastened from the underside using M1.4x4mm self tappi
 | Self tapping Screws | https://www.aliexpress.com/item/1005005469153402.html |
 | SMD diodes SOD-123 1N4148W T4 | https://www.aliexpress.com/item/32948518338.html |
 | 1.5mm Fibreoptic cable (for led shinethrough) | https://www.aliexpress.com/item/1005005886250822.html |
+| Reset button TL3342 | https://www.aliexpress.com/item/1005007506687094.html |
