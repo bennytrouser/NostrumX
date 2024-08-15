@@ -12,6 +12,7 @@ The aim was to create a case based board while maintaining as much of the origin
 - Created with the [ergogen](https://github.com/ergogen/ergogen) and KiCad8. Case files created with Autodesk Fusion360.
 - Firmware using ZMK, including the RGB Widget module from [Caksoylar](https://github.com/caksoylar/zmk-rgbled-widget)
 - Inspiration from the [Hummingbird](https://github.com/PJE66/hummingbird) style [Berylline](https://github.com/jcmkk3/trochilidae#berylline) by [jcmkk3](https://github.com/jcmkk3)
+- Mousebite breakaway tabs design are inspired by Sadekbaroudi's [bykeeb](https://github.com/sadekbaroudi/bykeeb)
 
 ![](Images/Top.jpg)
 
