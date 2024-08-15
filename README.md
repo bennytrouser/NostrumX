@@ -1,7 +1,7 @@
 # NostrumX
 A 32 key ergonomic split keyboard using Seeed Xiao BLE
 
-This keyboard is a variation on my original [Nostrum](https://github.com/bennytrouser/nostrum) but modified to use the Seeeduino Xiao BLE with the battery mounted under the PCB into the case. Not designed to be used without the case.
+This keyboard is a variation on my original [Nostrum](https://github.com/bennytrouser/nostrum) but modified to use the Seeeduino Xiao BLE with the battery mounted under the PCB within the case. Not designed to be used without the case.
 
 - 3° Splay on pinky and ring columns
 - Created with the [ergogen](https://github.com/ergogen/ergogen) and KiCad8. Case files created with Autodesk Fusion360.
